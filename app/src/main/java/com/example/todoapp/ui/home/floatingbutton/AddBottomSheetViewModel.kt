@@ -19,14 +19,13 @@ class AddBottomSheetViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val argID: Int = savedStateHandle.get<Int>("id") ?: 0
-    private val timeFormat = SimpleDateFormat("HH:mm")
+
     fun createTodo(title: String, date: Date, priority: Int) = viewModelScope.launch {
         todoRepository.addTodo(
             title,
             date,
             priority
         )
-        timeFormat.format(java.util.Date())
     }
 
     fun setAlarm(title: String, alarmTime: Long) {
