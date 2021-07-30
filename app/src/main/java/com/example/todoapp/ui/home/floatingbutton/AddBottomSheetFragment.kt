@@ -18,6 +18,7 @@ import com.example.todoapp.room.TodoEntity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.sql.Date
+import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -102,6 +103,8 @@ class AddBottomSheetFragment : BottomSheetDialogFragment(), DatePickerDialog.OnD
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         selectedTime[Calendar.HOUR_OF_DAY] = hourOfDay
         selectedTime[Calendar.MINUTE] = minute
-        binding.editTextTime.text = hourOfDay.toString() + ":" + minute.toString()
+        val timeFormat = SimpleDateFormat("HH:mm")
+        timeFormat.format(selectedTime)
+        binding.editTextTime.text = timeFormat.format(selectedTime)
     }
 }
