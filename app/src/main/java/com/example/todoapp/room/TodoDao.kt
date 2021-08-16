@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface TodoDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addTodo(todo: TodoEntity)
+    suspend fun insertTodo(todo: TodoEntity)
 
     @Query("SELECT * FROM todo_table ORDER BY id ASC")
     fun readAllData(): Flow<List<TodoEntity>>

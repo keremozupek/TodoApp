@@ -9,13 +9,12 @@ import javax.inject.Inject
 class TodoRepository
 @Inject constructor(
     private val todoDao: TodoDao
-
 ) {
 
     val readAllData: Flow<List<TodoEntity>> = todoDao.readAllData()
 
-    suspend fun addTodo(title: String, date: Date, priority: Int) {
-        todoDao.addTodo(TodoEntity(0, title, date, priority, false))
+    suspend fun insertTodo(title: String, date: Date, priority: Int) {
+        todoDao.insertTodo(TodoEntity(0, title, date, priority, false))
     }
 
     suspend fun deleteAllTodo() {

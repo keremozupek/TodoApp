@@ -28,11 +28,11 @@ class TodoAdapter(private val listener: (TodoEntity) -> Unit) :
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val item = items[position]
         holder.textTitle.text = item.title
-        holder.textDate.text = items[position].dueDate.toString()
-        holder.priority.text = items[position].priority.toString()
-        holder.checkBox.isChecked = items[position].done
+        holder.textDate.text = item.dueDate.toString()
+        holder.priority.text = item.priority.toString()
+        holder.checkBox.isChecked = item.done
 
-        holder.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+        holder.checkBox.setOnCheckedChangeListener { _, _ ->
             listener.invoke(item)
         }
     }

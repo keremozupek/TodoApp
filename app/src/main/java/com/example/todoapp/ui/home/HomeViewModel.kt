@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import com.example.todoapp.room.TodoEntity
 import com.example.todoapp.repositories.TodoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,6 +21,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val orderStateFlow: MutableStateFlow<OrderState> = MutableStateFlow(OrderState.ID)
+    @ExperimentalCoroutinesApi
     val items = orderStateFlow.flatMapLatest {
         when(it) {
             OrderState.TITLE -> todoRepository.getTodosOrderByTitle()

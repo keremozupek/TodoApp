@@ -104,7 +104,6 @@ class AddBottomSheetFragment : BottomSheetDialogFragment(), DatePickerDialog.OnD
         selectedTime[Calendar.HOUR_OF_DAY] = hourOfDay
         selectedTime[Calendar.MINUTE] = minute
         val timeFormat = SimpleDateFormat("HH:mm")
-        timeFormat.format(selectedTime)
-        binding.editTextTime.text = timeFormat.format(selectedTime)
+        binding.editTextTime.text = timeFormat.format(selectedTime.timeInMillis).toString()
     }
 }

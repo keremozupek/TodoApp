@@ -8,7 +8,6 @@ import com.example.todoapp.repositories.TodoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.sql.Date
-import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,7 +20,7 @@ class AddBottomSheetViewModel @Inject constructor(
     private val argID: Int = savedStateHandle.get<Int>("id") ?: 0
 
     fun createTodo(title: String, date: Date, priority: Int) = viewModelScope.launch {
-        todoRepository.addTodo(
+        todoRepository.insertTodo(
             title,
             date,
             priority
