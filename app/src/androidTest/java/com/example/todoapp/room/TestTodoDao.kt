@@ -30,8 +30,7 @@ class TestTodoDao {
     var hiltRule = HiltAndroidRule(this)
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
-    @get:Rule
-    val testCoroutineRule = TestCoroutineRule()
+
 
     @Inject
     @Named("test_db")
@@ -50,7 +49,7 @@ class TestTodoDao {
     }
 
     @Test
-    fun addTodo() = testCoroutineRule.testDispatcher.runBlockingTest {
+    fun addTodo() = runBlockingTest {
         val todo = TodoEntity(1,"Test", Date(5),1,false)
         todoDao.insertTodo(todo)
         val allTodos = todoDao.readAllData().first()
@@ -58,7 +57,7 @@ class TestTodoDao {
     }
 
     @Test
-    fun deleteTodo() = testCoroutineRule.testDispatcher.runBlockingTest {
+    fun deleteTodo() = runBlockingTest {
         val todo = TodoEntity(1,"Test", Date(5),1,false)
         todoDao.insertTodo(todo)
         todoDao.deleteTodo(1)
@@ -67,7 +66,7 @@ class TestTodoDao {
     }
 
     @Test
-    fun deleteAllTodo() = testCoroutineRule.testDispatcher.runBlockingTest {
+    fun deleteAllTodo() = runBlockingTest {
         val todoOne = TodoEntity(1,"Test", Date(5),1,false)
         todoDao.insertTodo(todoOne)
         val todoTwo = TodoEntity(1,"Test", Date(5),1,false)
@@ -81,19 +80,19 @@ class TestTodoDao {
 
 
     @Test
-    fun getOrderByPriority() = testCoroutineRule.testDispatcher.runBlockingTest {
-        val todoOne = TodoEntity(1,"Test", Date(5),3,false)
+    fun getOrderByPriority() = runBlockingTest {
+        val todoOne = TodoEntity(0,"Test", Date(5),1,false)
         todoDao.insertTodo(todoOne)
-        val todoTwo = TodoEntity(1,"Test", Date(5),5,false)
+        val todoTwo = TodoEntity(0,"Test", Date(5),5,false)
         todoDao.insertTodo(todoTwo)
-        val todoThree = TodoEntity(1,"Test", Date(5),1,false)
+        val todoThree = TodoEntity(0,"Test", Date(5),3,false)
         todoDao.insertTodo(todoThree)
         val todos = todoDao.getTodosOrderByPriority().first()
-        assertThat(todos).contains(TodoEntity(1,"Test", Date(5),5,false))
+        assertThat(todos[0]).isEqualTo(TodoEntity(2,"Test", Date(5),5,false))
     }
 
     @Test
-    fun getOrderByDate() = testCoroutineRule.testDispatcher.runBlockingTest {
+    fun getOrderByDate() = runBlockingTest {
         val todoOne = TodoEntity(1,"Test", Date(5),5,false)
         todoDao.insertTodo(todoOne)
         val todoTwo = TodoEntity(1,"Test", Date(7),5,false)
@@ -106,7 +105,7 @@ class TestTodoDao {
     }
 
     @Test
-    fun updateTodo() = testCoroutineRule.testDispatcher.runBlockingTest {
+    fun updateTodo() = runBlockingTest {
             val todo = TodoEntity(1,"Test", Date(5),1,false)
             todoDao.insertTodo(todo)
             todoDao.updateTodo(todo.copy(title = "Test123"))

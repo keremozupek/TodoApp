@@ -1,43 +1,24 @@
 package com.example.todoapp.repositories
 
-import com.example.todoapp.room.TodoDao
 import com.example.todoapp.room.TodoEntity
 import kotlinx.coroutines.flow.Flow
 import java.sql.Date
-import javax.inject.Inject
 
-class TodoRepository
-@Inject constructor(
-    private val todoDao: TodoDao
-) {
+interface TodoRepository {
 
-    val readAllData: Flow<List<TodoEntity>> = todoDao.readAllData()
+    val readAllData: Flow<List<TodoEntity>>
 
-    suspend fun insertTodo(title: String, date: Date, priority: Int) {
-        todoDao.insertTodo(TodoEntity(0, title, date, priority, false))
-    }
+    suspend fun insertTodo(title: String, date: Date, priority: Int)
 
-    suspend fun deleteAllTodo() {
-        todoDao.deleteAllTodo()
-    }
+    suspend fun deleteAllTodo()
 
-    fun getTodosOrderByPriority(): Flow<List<TodoEntity>> {
-        return todoDao.getTodosOrderByPriority()
-    }
+    fun getTodosOrderByPriority() : Flow<List<TodoEntity>>
 
-    fun getTodosOrderByDate(): Flow<List<TodoEntity>> {
-        return todoDao.getTodosOrderByDate()
-    }
+    fun getTodosOrderByDate() : Flow<List<TodoEntity>>
 
-    fun getTodosOrderByTitle(): Flow<List<TodoEntity>> {
-        return todoDao.getTodosOrderByTitle()
-    }
+    fun getTodosOrderByTitle() : Flow<List<TodoEntity>>
 
-    suspend fun updateTodo(todoModel: TodoEntity) {
-        todoDao.updateTodo(todoModel)
-    }
+    suspend fun updateTodo(todoModel: TodoEntity)
 
-    suspend fun getID(): List<Int> {
-        return todoDao.getIDs()
-    }
+    suspend fun getIDs() : List<Int>
 }

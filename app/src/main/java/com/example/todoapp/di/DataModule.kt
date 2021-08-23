@@ -2,6 +2,8 @@ package com.example.todoapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.todoapp.repositories.TodoRepository
+import com.example.todoapp.repositories.TodoRepositoryImpl
 import com.example.todoapp.room.TodoDao
 import com.example.todoapp.room.TodoDatabase
 import dagger.Module
@@ -31,4 +33,11 @@ object DataModule {
     fun provideTodoDAO(todoDatabase: TodoDatabase): TodoDao {
         return todoDatabase.todoDao()
     }
+
+    @ViewModelScoped
+    @Provides
+    fun provideTodoRepository(todoDao : TodoDao): TodoRepository {
+        return TodoRepositoryImpl(todoDao)
+    }
+
 }

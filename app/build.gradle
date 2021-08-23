@@ -66,6 +66,7 @@ dependencies {
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1"
 
     //ViewModel
@@ -89,6 +90,8 @@ dependencies {
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation 'app.cash.turbine:turbine:0.6.0'
     androidTestImplementation 'app.cash.turbine:turbine:0.6.0'
+    testImplementation 'io.mockk:mockk:1.12.0'
 }

@@ -1,7 +1,6 @@
 package com.example.todoapp.ui.home.floatingbutton
 
 import android.app.*
-import android.content.Context.ALARM_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,8 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.todoapp.R
 import com.example.todoapp.databinding.FragmentBottomsheetAddBinding
-import com.example.todoapp.room.TodoEntity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.sql.Date
@@ -75,7 +72,7 @@ class AddBottomSheetFragment : BottomSheetDialogFragment(), DatePickerDialog.OnD
             if (binding.editTextDate.text == getString(R.string.select_date) || binding.editTextTime.text == getString(R.string.select_time)) {
                 Toast.makeText(context, "You have to select date and time", Toast.LENGTH_LONG).show()
             } else {
-                viewModel.createTodo(
+                viewModel.insertTodo(
                     binding.editTextTitle.text.toString(),
                     Date(selectedTime.timeInMillis),
                     binding.prioritySpinner.selectedItem.toString().toInt()
